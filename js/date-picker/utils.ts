@@ -387,8 +387,28 @@ export interface DateTime {
   value: Date;
 }
 
-export function flagActive(data: any[], { ...args }: any) {
-  const { start, end, hoverStart, hoverEnd, type = 'date', isRange = false } = args;
+interface FlagActiveOptions {
+  start: Date;
+  end: Date;
+  hoverStart: Date;
+  hoverEnd: Date;
+  type: any;
+  isRange: boolean;
+  value: DateValue | DateValue[];
+  multiple: boolean;
+}
+
+export function flagActive(data: any[], { ...args }: FlagActiveOptions) {
+  const {
+    start,
+    end,
+    hoverStart,
+    hoverEnd,
+    type = 'date',
+    isRange = false,
+    value,
+    multiple = false,
+  } = args;
 
   // 周选择器不更改 cell 样式
   if (type === 'week') return data;
@@ -396,7 +416,13 @@ export function flagActive(data: any[], { ...args }: any) {
   if (!isRange) {
     return data.map((row: any[]) => row.map((item: DateTime) => {
       const _item = item;
-      _item.active = start && isSame(item.value, start, type) && !_item.additional;
+
+      if (multiple) {
+        _item.active = (value as DateValue[]).some((val) => isSame(dayjs(val).toDate(), _item.value, type) && !_item.additional);
+      } else {
+        _item.active = start && isSame(item.value, start, type) && !_item.additional;
+      }
+
       return _item;
     }));
   }
@@ -428,9 +454,9 @@ export function flagActive(data: any[], { ...args }: any) {
 
 // extract time format from a completed date format 'YYYY-MM-DD HH:mm' -> 'HH:mm'
 export function extractTimeFormat(dateFormat: string = '') {
-  const res = dateFormat.match(/(a\s)?h{1,2}(:m{1,2})?(:s{1,2})?(\sa)?/i);
-  if (!res) return null;
-  return res[0];
+  return dateFormat
+    .replace(/\W?Y{2,4}|\W?D{1,2}|\W?Do|\W?d{1,4}|\W?M{1,4}|\W?y{2,4}/g, '')
+    .trim();
 }
 
 /**
