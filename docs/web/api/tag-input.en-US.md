@@ -2,7 +2,7 @@
 title: TagInput
 description: Used to enter a text label.
 isComponent: true
-usage: { title: '', description: '' }
+usage: { title: "", description: "" }
 spline: data
 ---
 
@@ -15,6 +15,12 @@ spline: data
 Use `excessTagsDisplayType` to control the rendering method when the tag exceeds:Horizontal scroll display and line-feed display. The default is line-feed display.
 
 {{ excess }}
+
+### Maximum Number of Rows When Tags Exceed Limit
+
+Use `maxRows` to control the maximum number of rows when tags exceed the limit. A scrollbar will appear when the number of rows exceeds this limit. By default, there is no limit.
+
+{{ max-row }}
 
 ### Tag input box with limited number
 
