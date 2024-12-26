@@ -2,7 +2,7 @@
 title: TagInput 标签输入框
 description: 用于输入文本标签。
 isComponent: true
-usage: { title: "", description: "" }
+usage: { title: '', description: '' }
 spline: data
 ---
 

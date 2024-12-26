@@ -45,6 +45,7 @@
 
   /** 设计稿：未填充标签场景，边距和已填充不同 */
   &.@{prefix}-is-empty {
+
     .@{prefix}-input__inner {
       margin-left: @comp-margin-xs;
     }
@@ -71,6 +72,7 @@
   }
 
   &.@{prefix}-input--auto-width {
+
     .@{prefix}-input.@{prefix}-input--focused {
       padding-right: @tag-input-clear-icon-padding-m;
     }
@@ -93,6 +95,7 @@
 
 // 标签数量超出时，换行显示
 .@{prefix}-tag-input--break-line:not(.@{prefix}-is-empty) {
+
   .@{prefix}-input {
     display: block;
 
@@ -119,9 +122,7 @@
 }
 
 /** 换行模式避免标签和右侧图标重合，需保留图标宽度 22px 和左侧距离标签间距 8px */
-.@{prefix}-tag-input--break-line.@{prefix}-tag-input--with-tag:not(
-    .@{prefix}-input--auto-width
-  ),
+.@{prefix}-tag-input--break-line.@{prefix}-tag-input--with-tag:not(.@{prefix}-input--auto-width),
 .@{prefix}-tag-input.@{prefix}-input--auto-width:hover {
   .@{prefix}-input {
     padding-right: @tag-input-clear-icon-padding-m;
