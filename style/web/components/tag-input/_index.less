@@ -146,14 +146,14 @@
 .@{prefix}-tag-input--max-rows {
   .@{prefix}-input {
     &.@{prefix}-size-s {
-      max-height: calc(var(--max-rows, 1) * @tag-input-height-s) !important;
+      max-height: calc(var(--max-rows, 1) * @tag-input-height-s);
     }
 
     &.@{prefix}-size-l {
-      max-height: calc(var(--max-rows, 1) * @tag-input-height-l) !important;
+      max-height: calc(var(--max-rows, 1) * (@tag-input-height-l - 2px));
     }
 
-    max-height: calc(var(--max-rows, 1) * @tag-input-height-default) !important;
+    max-height: calc(var(--max-rows, 1) * (@tag-input-height-default - 2px));
     overflow-y: scroll;
   }
 }

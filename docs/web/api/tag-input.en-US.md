@@ -2,7 +2,7 @@
 title: TagInput
 description: Used to enter a text label.
 isComponent: true
-usage: { title: "", description: "" }
+usage: { title: '', description: '' }
 spline: data
 ---
 
