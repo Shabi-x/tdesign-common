@@ -1,6 +1,4 @@
-import isString from 'lodash/isString';
-import isNumber from 'lodash/isNumber';
-import isObject from 'lodash/isObject';
+import { isString, isNumber, isObject } from 'lodash-es';
 import log from '../log/log';
 
 export type InputNumberDecimalPlaces = number | { enableRound: boolean, places: number };
@@ -359,11 +357,15 @@ export function formatDecimal(num: number, places: number, enableRound: boolean 
     return integer;
   }
   // 补足小数位数
-  let decimalNumber = decimal.slice(0, places);
-  if (decimal.length < places) {
-    decimalNumber += (fillZero(places - decimal.length));
+  if (decimal) {
+    let decimalNumber = decimal.slice(0, places);
+    if (decimal.length < places) {
+      decimalNumber += fillZero(places - decimal.length);
+    }
+    return [integer, decimalNumber].join('.');
   }
-  return [integer, decimalNumber].join('.');
+
+  return [integer, fillZero(places)].join('.');
 }
 
 export function decimalPlacesToFixedNum(num: number, decimalPlaces: InputNumberDecimalPlaces) {

@@ -1,10 +1,4 @@
-import isNull from 'lodash/isNull';
-import isFunction from 'lodash/isFunction';
-import isNumber from 'lodash/isNumber';
-import uniqueId from 'lodash/uniqueId';
-import isBoolean from 'lodash/isBoolean';
-import isNil from 'lodash/isNil';
-import get from 'lodash/get';
+import { isNull, isFunction, isNumber, uniqueId, isBoolean, isNil, get } from 'lodash-es';
 import { TreeStore } from './tree-store';
 import {
   TreeNodeValue,
@@ -26,7 +20,7 @@ const { hasOwnProperty } = Object.prototype;
 
 // 这里的属性为 data 中属性可以同步到 treeNode 实例属性的白名单
 // 仅 label 属性和在列表中的属性可以通过 set 方法配置到 treeNode 实例上
-export const setableStatus: Record<string, boolean | null> = {
+export const settableStatus: Record<string, boolean | null> = {
   expandMutex: null,
   activable: null,
   checkable: null,
@@ -34,9 +28,9 @@ export const setableStatus: Record<string, boolean | null> = {
   loading: false,
 };
 
-export const setableProps = Object.keys(setableStatus);
+export const settableProps = Object.keys(settableStatus);
 
-export const syncableProps = [...setableProps, 'actived', 'expanded', 'checked'];
+export const syncableProps = [...settableProps, 'actived', 'expanded', 'checked'];
 
 export const privateKey = '__tdesign_id__';
 
@@ -557,7 +551,7 @@ export class TreeNode {
     const keys = Object.keys(item);
     keys.forEach((key) => {
       // key, disabled 字段可被 tree.config.keys 定义
-      if (hasOwnProperty.call(setableStatus, key) || key === 'label') {
+      if (hasOwnProperty.call(settableStatus, key) || key === 'label') {
         this[key] = item[key];
       }
       if (key === 'disabled') {
